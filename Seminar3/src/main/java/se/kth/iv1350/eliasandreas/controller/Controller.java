@@ -3,6 +3,7 @@ package main.java.se.kth.iv1350.eliasandreas.controller;
 import main.java.se.kth.iv1350.eliasandreas.model.Sale;
 import main.java.se.kth.iv1350.eliasandreas.model.CashRegister;
 import main.java.se.kth.iv1350.eliasandreas.integration.ItemDTO;
+import main.java.se.kth.iv1350.eliasandreas.integration.Printer;
 import main.java.se.kth.iv1350.eliasandreas.integration.DatabaseConnector;
 
 /*
@@ -11,8 +12,12 @@ import main.java.se.kth.iv1350.eliasandreas.integration.DatabaseConnector;
 public class Controller{
     private Sale sale;
     private CashRegister cashRegister;
+    private DatabaseConnector datacon;
+    private Printer printer;
 
-    public Controller(){
+    public Controller(DatabaseConnector datacon, Printer printer){
+        this.datacon = datacon;
+        this.printer = printer;
         cashRegister = new CashRegister();
     }
 
@@ -23,16 +28,25 @@ public class Controller{
         sale = new Sale();
     }
 
-    public ItemDTO addItem(char itemIdentifier, int quantity){
-        ItemDTO soldItem = sale.checkIfExists('a');
+    public ItemDTO addItem(String itemIdentifier, int quantity){
+        ItemDTO soldItem = sale.checkIfExists("a");
         if(soldItem == null){
-            soldItem = new DatabaseConnector().fetchItem('a');
+            soldItem = datacon.fetchItem("a");
         }
         int runningTotal = sale.recordItem(soldItem, 1);
         return soldItem;
     }
 
-    public void endSale(){
-
+    /*
+     * endSale and discountrequest bellow
+     */
+    public int endSale(){
+        return sale.getTotal();
+    }
+    public int pays(int amountPaid)
+    {
+        datacon.logSale(sale);
+        cashRegister.updateAmount(amountPaid);
+        return 1;
     }
 }

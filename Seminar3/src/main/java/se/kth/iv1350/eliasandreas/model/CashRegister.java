@@ -3,6 +3,11 @@ package main.java.se.kth.iv1350.eliasandreas.model;
 public class CashRegister {
     private int balance;
 
+    public CashRegister()
+    {
+        
+    }
+
     public void updateAmount(int amountPaid){
 
     }

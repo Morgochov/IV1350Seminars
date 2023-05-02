@@ -4,7 +4,7 @@ import main.java.se.kth.iv1350.eliasandreas.model.Sale;
 
 public class InventorySystem {
     
-    public ItemDTO searchInventory(char itemIdentifier){
+    public ItemDTO searchInventory(String itemIdentifier){
         return new ItemDTO();
     }
 

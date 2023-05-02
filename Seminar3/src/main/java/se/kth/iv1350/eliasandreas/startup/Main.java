@@ -17,7 +17,7 @@ public class Main{
     public static void main(String[] args){
         DatabaseConnector datacon = new DatabaseConnector();
         Printer printer = new Printer();
-        Controller contr = new Controller();
+        Controller contr = new Controller(datacon, printer);
         //Runs fake execution in the row below, remove before sending to teachers
         new View(contr).runFakeExecution();
     }

@@ -16,11 +16,12 @@ public class DatabaseConnector {
         accountingSystem = new AccountingSystem();
     }
 
-    public ItemDTO fetchItem(char itemIdentifier){
-        return inventorySystem.searchInventory('a');
+    public ItemDTO fetchItem(String itemIdentifier){
+        return inventorySystem.searchInventory("a");
     }
 
     public void logSale(Sale currentSale){
-
+        accountingSystem.recordSale(currentSale);
+        inventorySystem.updateInventory(currentSale);
     }
 }
