@@ -77,4 +77,20 @@ public class Sale {
         }
         return totalPrice;
     }
+    public int getVAT()
+    {
+        int VAT = 0;
+        for(int i = 0; i < items.length; i++){
+            VAT += items[i].tax()/10 * items[i].price();
+        }
+        return VAT;
+    }
+    public ItemDTO[] getItems()
+    {
+        return items;
+    }
+    public int getQuantity(int i)
+    {
+        return this.itemQuantity[i];
+    }
 }

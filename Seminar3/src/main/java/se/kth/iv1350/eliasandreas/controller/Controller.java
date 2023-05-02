@@ -56,9 +56,10 @@ public class Controller{
     {
         datacon.logSale(sale);
         cashRegister.updateAmount(amountPaid);
-        Receipt currentReciept = new Receipt(sale);
+        int change = cashRegister.calculateChange(amountPaid, sale.getTotal());
+        Receipt currentReciept = new Receipt(sale,change, amountPaid);
         printer.printReceipt(currentReciept);
-        return cashRegister.calculateChange(amountPaid, sale.getTotal());
+        return change;
     }
 
     /*
