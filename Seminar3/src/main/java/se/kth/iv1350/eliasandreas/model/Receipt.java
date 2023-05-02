@@ -6,11 +6,11 @@ import java.util.Date;
 import main.java.se.kth.iv1350.eliasandreas.integration.ItemDTO;
 
 public class Receipt {
-    String timeOfSale;
-    String[] soldItems;
-    int totalPrice;
-    int VAT;
-    String paymentAndChange;
+    private String timeOfSale;
+    private String[] soldItems;
+    private int totalPrice;
+    private int VAT;
+    private String paymentAndChange;
 
     
     public Receipt(Sale sale, int change, int amountPaid)
