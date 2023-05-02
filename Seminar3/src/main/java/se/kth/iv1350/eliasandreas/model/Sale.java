@@ -9,7 +9,7 @@ import main.java.se.kth.iv1350.eliasandreas.integration.DiscountDTO;
 */
 public class Sale {
     ItemDTO[] items;
-    int[] itemquant;
+    int[] itemqQuantity;
     DiscountDTO discounts;
 
     public ItemDTO checkIfExists(String itemIdentifier){
@@ -20,7 +20,7 @@ public class Sale {
                 return items[i];
             }
         }
-        return new ItemDTO();
+        return null;
     }
 
     public int recordItem(ItemDTO soldItem, int quantity){
@@ -32,7 +32,7 @@ public class Sale {
         {
             if(items[i] == soldItem)
             {
-                itemquant[i] += quantity;
+                itemqQuantity[i] += quantity;
                 return 1;
             }
 
@@ -46,13 +46,13 @@ public class Sale {
         for(i = 0; i<items.length; i++)
         {
             temp[i] = items[i];
-            quanttemp[i] = itemquant[i];
+            quanttemp[i] = itemqQuantity[i];
 
         }
         temp[i] = soldItem;
         quanttemp[i] = quantity;
         items = temp;
-        itemquant = quanttemp;
+        itemqQuantity = quanttemp;
         return 1;
     }
     public void applyDiscount(DiscountDTO discounts)

@@ -40,16 +40,31 @@ public class Controller{
     }
 
     /*
-     * endSale and discountrequest bellow
+     * endSale and discountrequest below
      */
     public int endSale(){
         return sale.getTotal();
     }
 
     /*
+     * pays logs the sale in both the accounting and the inventory system, updates the new cash amount
+     * in the cash register, creates and prints a receipt and returns the amount of change
+     * 
+     * @param amountPaid is the amount the customer has paid
+     */
+    public int pays(int amountPaid)
+    {
+        datacon.logSale(sale);
+        cashRegister.updateAmount(amountPaid);
+        Receipt currentReciept = new Receipt(sale);
+        printer.printReceipt(currentReciept);
+        return cashRegister.calculateChange(amountPaid, sale.getTotal());
+    }
+
+    /*
      * Discount request with no function as it is stated in the flow 
      */
-    public void discountrequest()
+    public void discountRequest()
     {
         /* 
          * WTF varför finns denna
@@ -63,14 +78,5 @@ public class Controller{
         DiscountDTO discount = datacon.fetchDiscount(customerID);
         sale.applyDiscount(discount);
         return sale.getTotal();
-    }
-
-    public int pays(int amountPaid)
-    {
-        datacon.logSale(sale);
-        cashRegister.updateAmount(amountPaid);
-        Receipt currentReciept = new Receipt(sale);
-        printer.printReceipt(currentReciept);
-        return cashRegister.calculateChange(amountPaid, sale.getTotal());
     }
 }

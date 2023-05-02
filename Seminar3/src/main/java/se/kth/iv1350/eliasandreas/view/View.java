@@ -18,10 +18,6 @@ public class View{
     public View(Controller contr){
         this.contr = contr;
     }
-
-    public void amountOfChange(int change){
-        
-    }
     
     /*
      * Performs a fake sale, by calling all system operations in the controller.
@@ -31,5 +27,7 @@ public class View{
         System.out.println("A new sale has been started.");
     }
 
-    ItemDTO displayAddedItem = contr.addItem('a', 1);
+    ItemDTO displayAddedItem = contr.addItem("a", 1);
+    int totalPrice = contr.endSale();
+    int change = contr.pays(totalPrice);
 }
