@@ -31,11 +31,11 @@ public class Controller{
     }
 
     public ItemDTO addItem(String itemIdentifier, int quantity){
-        ItemDTO soldItem = sale.checkIfExists("a");
+        ItemDTO soldItem = sale.checkIfExists(itemIdentifier);
         if(soldItem == null){
-            soldItem = datacon.fetchItem("a");
+            soldItem = datacon.fetchItem(itemIdentifier);
         }
-        int runningTotal = sale.recordItem(soldItem, 1);
+        int runningTotal = sale.recordItem(soldItem, quantity);
         return soldItem;
     }
 

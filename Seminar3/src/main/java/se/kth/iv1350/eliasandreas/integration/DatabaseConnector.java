@@ -19,7 +19,7 @@ public class DatabaseConnector {
     }
 
     public ItemDTO fetchItem(String itemIdentifier){
-        return inventorySystem.searchInventory("a");
+        return inventorySystem.searchInventory(itemIdentifier);
     }
 
     public void logSale(Sale currentSale){
