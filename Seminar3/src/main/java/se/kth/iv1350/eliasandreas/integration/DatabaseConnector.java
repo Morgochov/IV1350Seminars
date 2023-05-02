@@ -10,10 +10,12 @@ public class DatabaseConnector {
     
     private InventorySystem inventorySystem;
     private AccountingSystem accountingSystem;
+    private DiscountSystem discountSystem;
 
     public DatabaseConnector(){
         inventorySystem = new InventorySystem();
         accountingSystem = new AccountingSystem();
+        discountSystem = new DiscountSystem();
     }
 
     public ItemDTO fetchItem(String itemIdentifier){
@@ -23,5 +25,9 @@ public class DatabaseConnector {
     public void logSale(Sale currentSale){
         accountingSystem.recordSale(currentSale);
         inventorySystem.updateInventory(currentSale);
+    }
+    public DiscountDTO fetchDiscount(String customerID)
+    {
+        return discountSystem.searchDiscount(customerID);
     }
 }

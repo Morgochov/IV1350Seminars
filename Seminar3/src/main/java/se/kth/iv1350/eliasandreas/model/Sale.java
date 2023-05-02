@@ -1,6 +1,8 @@
 package main.java.se.kth.iv1350.eliasandreas.model;
 
 import main.java.se.kth.iv1350.eliasandreas.integration.ItemDTO;
+import main.java.se.kth.iv1350.eliasandreas.integration.DiscountDTO;
+
 
 /*
 * One single sale made by one single customer and payed with one payment.
@@ -8,7 +10,7 @@ import main.java.se.kth.iv1350.eliasandreas.integration.ItemDTO;
 public class Sale {
     ItemDTO[] items;
     int[] itemquant;
-    char discounts;
+    DiscountDTO discounts;
 
     public ItemDTO checkIfExists(String itemIdentifier){
         for(int i = 0; i<items.length; i++)
@@ -52,6 +54,11 @@ public class Sale {
         items = temp;
         itemquant = quanttemp;
         return 1;
+    }
+    public void applyDiscount(DiscountDTO discounts)
+    {
+        this.discounts = discounts;
+        //Osäker kring detta 
     }
 
     public int getTotal(){

@@ -2,7 +2,9 @@ package main.java.se.kth.iv1350.eliasandreas.controller;
 
 import main.java.se.kth.iv1350.eliasandreas.model.Sale;
 import main.java.se.kth.iv1350.eliasandreas.model.CashRegister;
+import main.java.se.kth.iv1350.eliasandreas.model.Receipt;
 import main.java.se.kth.iv1350.eliasandreas.integration.ItemDTO;
+import main.java.se.kth.iv1350.eliasandreas.integration.DiscountDTO;
 import main.java.se.kth.iv1350.eliasandreas.integration.Printer;
 import main.java.se.kth.iv1350.eliasandreas.integration.DatabaseConnector;
 
@@ -43,10 +45,32 @@ public class Controller{
     public int endSale(){
         return sale.getTotal();
     }
+
+    /*
+     * Discount request with no function as it is stated in the flow 
+     */
+    public void discountrequest()
+    {
+        /* 
+         * WTF varför finns denna
+         */
+    }
+    /*
+     * getDiscount with customerID as parameter
+     */
+    public int getDiscount(String customerID)
+    {
+        DiscountDTO discount = datacon.fetchDiscount(customerID);
+        sale.applyDiscount(discount);
+        return sale.getTotal();
+    }
+
     public int pays(int amountPaid)
     {
         datacon.logSale(sale);
         cashRegister.updateAmount(amountPaid);
-        return 1;
+        Receipt currentReciept = new Receipt(sale);
+        printer.printReceipt(currentReciept);
+        return cashRegister.calculateChange(amountPaid, sale.getTotal());
     }
 }
