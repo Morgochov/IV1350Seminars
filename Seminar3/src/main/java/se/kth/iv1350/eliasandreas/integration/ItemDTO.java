@@ -1,8 +1,15 @@
 package main.java.se.kth.iv1350.eliasandreas.integration;
 
 public class ItemDTO {
-    private char description;
+    
+    private String identifier;
+    private String description;
     private int price;
     private int tax;
     private boolean validIdentifier;
+
+    public String identifier()
+    {
+        return this.identifier;
+    }
 }
