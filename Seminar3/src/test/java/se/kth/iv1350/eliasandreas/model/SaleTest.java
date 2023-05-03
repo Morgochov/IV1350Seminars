@@ -14,15 +14,18 @@ import main.java.se.kth.iv1350.eliasandreas.integration.ItemDTO;
 public class SaleTest {
     
     private Sale testSale;
+    private ItemDTO testDTO;
 
     @BeforeEach
     public void setUpClass(){
         testSale = new Sale();
+        testDTO = new ItemDTO("potato", "potato", "", 40, 10);
     }
 
     @AfterEach
     public void tearDownClass(){
         testSale = null;
+        testDTO = null;
     }
 
     @Test
@@ -49,7 +52,7 @@ public class SaleTest {
     void testSaleRecordItem(){
         ItemDTO tempus = new ItemDTO("", "", "", 0, 0);
         
-        testSale.items[] = new ItemDTO(1);
+        testSale.items = new ItemDTO(1);
         testSale.items[0] = tempus;
 
         int temp = testSale.recordItem(tempus, 0);
@@ -58,20 +61,19 @@ public class SaleTest {
     @Test
     void testSaleGetTotal(){
 
+        testSale.recordItem(testDTO, 3);
+
+        int expResult = (Math.round(40*(1+10/100f)))*3;
+        int result = testSale.getTotal();
+        assertEquals("incorrect total", expResult, result, 0);
     }
     
     @Test
     void testSaleGetVAT(){
+        testSale.recordItem(testDTO, 3);
 
-    }
-    
-    @Test
-    void testSaleGetItems(){
-
-    }
-    
-    @Test
-    void testSaleGetQuantity(){
-
+        int expResult = (Math.round(40*(10/100f)))*3;
+        float result = testSale.getVAT();
+        assertEquals("incorrect VAT", expResult, result, 0);
     }
 }

@@ -44,7 +44,6 @@ public class Sale {
                 itemQuantity[i] += quantity;
                 return getTotal();
             }
-
         }
         /*
          * Extends the arrays and adds the new item and quantity there of then returns running total
@@ -74,16 +73,17 @@ public class Sale {
     public int getTotal(){
         int totalPrice = 0;
         for(int i = 0; i < items.length; i++){
-            totalPrice += (items[i].price() + items[i].tax()) * itemQuantity[i];
+            totalPrice += (items[i].price() * (1 + items[i].tax()/100f)) * itemQuantity[i];
         }
         return totalPrice;
     }
     
-    public int getVAT()
+    public float getVAT()
     {
-        int VAT = 0;
+        float VAT = 0;
         for(int i = 0; i < items.length; i++){
-            VAT += items[i].tax()/10 * items[i].price() * itemQuantity[i];
+            VAT += items[i].tax()/100f * items[i].price() * itemQuantity[i];
+            System.out.println();
         }
         return VAT;
     }

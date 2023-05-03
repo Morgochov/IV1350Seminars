@@ -9,7 +9,7 @@ public class Receipt {
     public String timeOfSale;
     public String[] soldItems;
     public int totalPrice;
-    public int VAT;
+    public float VAT;
     public String paymentAndChange;
 
     
