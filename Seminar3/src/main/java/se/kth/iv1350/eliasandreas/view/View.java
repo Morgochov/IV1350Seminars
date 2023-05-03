@@ -27,16 +27,5 @@ public class View{
         ItemDTO displayAddedItem = contr.addItem("potato", 2);
         int totalPrice = contr.endSale();
         int change = contr.pays(totalPrice + 5);
-        System.out.println();
-        System.out.println("Receipt:");
-        System.out.println();
-        System.out.println("Date and time: " + "saleTime");
-        System.out.println("--- Goods");
-        System.out.println("Item 1: " + displayAddedItem.identifier() + ", quantity" + ", " + displayAddedItem.price() + "kr");
-        System.out.println("--- Payment");
-        System.out.println("Total price: " + totalPrice);
-        System.out.println("VAT: " + "VAT");
-        System.out.println("Amount paid: " + "amountPaid");
-        System.out.println("Change: " + change);
     }
 }

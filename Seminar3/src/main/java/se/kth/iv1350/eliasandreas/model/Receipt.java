@@ -6,11 +6,11 @@ import java.util.Date;
 import main.java.se.kth.iv1350.eliasandreas.integration.ItemDTO;
 
 public class Receipt {
-    private String timeOfSale;
-    private String[] soldItems;
-    private int totalPrice;
-    private int VAT;
-    private String paymentAndChange;
+    public String timeOfSale;
+    public String[] soldItems;
+    public int totalPrice;
+    public int VAT;
+    public String paymentAndChange;
 
     
     public Receipt(Sale sale, int change, int amountPaid)
@@ -19,18 +19,15 @@ public class Receipt {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");  
         timeOfSale = formatter.format(date); 
         ItemDTO[] items = sale.getItems();
-        String itemDetails;
+        soldItems = new String[items.length];
         for(int i = 0; i<items.length; i++)
         {
-            itemDetails = items[i].name();
-            itemDetails += " " + Integer.toString(sale.getQuantity(i));
-            itemDetails += " " + Integer.toString(items[i].price());
-            soldItems[i] = itemDetails;
+            soldItems[i] = items[i].name();
+            soldItems[i] += ", " + Integer.toString(sale.getQuantity(i));
+            soldItems[i] += ", " + Integer.toString(items[i].price()) + "kr";
         }
         totalPrice=sale.getTotal();
         VAT = sale.getVAT();
-        paymentAndChange = "AmountPaid: "+ Integer.toString(amountPaid) +" AmountOfChange: "+ Integer.toString(change);
-
-        
+        paymentAndChange = "Amount Paid: "+ Integer.toString(amountPaid) +"\nChange: "+ Integer.toString(change);        
     }
 }

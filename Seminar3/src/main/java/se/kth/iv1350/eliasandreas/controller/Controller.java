@@ -12,7 +12,7 @@ import main.java.se.kth.iv1350.eliasandreas.integration.DatabaseConnector;
  * This is the application's only controller. All calls to the model pass through this class.
  */
 public class Controller{
-    private Sale sale;
+    public Sale sale;
     private CashRegister cashRegister;
     private DatabaseConnector datacon;
     private Printer printer;
@@ -57,7 +57,7 @@ public class Controller{
         datacon.logSale(sale);
         cashRegister.updateAmount(amountPaid);
         int change = cashRegister.calculateChange(amountPaid, sale.getTotal());
-        Receipt currentReciept = new Receipt(sale,change, amountPaid);
+        Receipt currentReciept = new Receipt(sale, change, amountPaid);
         printer.printReceipt(currentReciept);
         return change;
     }
