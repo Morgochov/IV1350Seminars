@@ -20,7 +20,7 @@ public class Controller{
     public Controller(DatabaseConnector datacon, Printer printer){
         this.datacon = datacon;
         this.printer = printer;
-        cashRegister = new CashRegister();
+        cashRegister = new CashRegister(2000);
     }
 
     /*

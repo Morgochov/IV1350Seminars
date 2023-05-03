@@ -37,33 +37,34 @@ public class Sale {
          * checks if item is already in items and if so then adds the quantity of items
          * If the item is present it returns the running total.
          */
-        for(int i = 0; i<arrayLength; i++)
-        {
+        for(int i = 0; i < arrayLength; i++)
+        { 
             if(items[i] == soldItem)
             {
                 itemQuantity[i] += quantity;
-                return 1;
+                return getTotal();
             }
 
         }
         /*
          * Extends the arrays and adds the new item and quantity there of then returns running total
          */
-        ItemDTO[] temp = new ItemDTO[arrayLength+1];
-        int[] quanttemp = new int[arrayLength+1];
+        ItemDTO[] newItemDTOArray = new ItemDTO[arrayLength+1];
+        int[] newQuantityArray = new int[arrayLength+1];
         int i;
         for(i = 0; i<arrayLength; i++)
         {
-            temp[i] = items[i];
-            quanttemp[i] = itemQuantity[i];
+            newItemDTOArray[i] = items[i];
+            newQuantityArray[i] = itemQuantity[i];
 
         }
-        temp[i] = soldItem;
-        quanttemp[i] = quantity;
-        items = temp;
-        itemQuantity = quanttemp;
+        newItemDTOArray[i] = soldItem;
+        newQuantityArray[i] = quantity;
+        items = newItemDTOArray;
+        itemQuantity = newQuantityArray;
         return getTotal();
     }
+    
     public void applyDiscount(DiscountDTO discounts)
     {
         this.discounts = discounts;
@@ -77,6 +78,7 @@ public class Sale {
         }
         return totalPrice;
     }
+    
     public int getVAT()
     {
         int VAT = 0;
@@ -85,10 +87,12 @@ public class Sale {
         }
         return VAT;
     }
+    
     public ItemDTO[] getItems()
     {
         return items;
     }
+    
     public int getQuantity(int i)
     {
         return this.itemQuantity[i];

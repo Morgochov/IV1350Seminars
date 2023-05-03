@@ -1,7 +1,11 @@
 package main.java.se.kth.iv1350.eliasandreas.model;
 
 public class CashRegister {
-    private int balance = 2000;
+    private int balance;
+
+    public CashRegister(int cashAmount){
+        balance = cashAmount;
+    }
 
     public void updateAmount(int amountPaid){
         balance += amountPaid;

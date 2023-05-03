@@ -9,9 +9,9 @@ public class ItemDTO {
     private int tax;
     private boolean validIdentifier;
 
-    public ItemDTO(String identifierNew, String descriptionNew, int priceNew, int taxNew){
+    public ItemDTO(String identifierNew, String nameNew, String descriptionNew, int priceNew, int taxNew){
         this.identifier = identifierNew;
-        this.name = "item";
+        this.name = nameNew;
         this.description = descriptionNew;
         this.price = priceNew;
         this.tax = taxNew;
@@ -26,7 +26,10 @@ public class ItemDTO {
     {
         return this.name;
     }
-
+    public String description()
+    {
+        return this.description;
+    }
     public int price(){
         return this.price;
     }

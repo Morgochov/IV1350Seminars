@@ -26,6 +26,7 @@ public class DatabaseConnector {
         accountingSystem.recordSale(currentSale);
         inventorySystem.updateInventory(currentSale);
     }
+    
     public DiscountDTO fetchDiscount(String customerID)
     {
         return discountSystem.searchDiscount(customerID);
