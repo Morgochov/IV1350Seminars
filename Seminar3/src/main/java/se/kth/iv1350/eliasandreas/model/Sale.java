@@ -73,7 +73,7 @@ public class Sale {
     public int getTotal(){
         int totalPrice = 0;
         for(int i = 0; i < items.length; i++){
-            totalPrice += items[i].price() * itemQuantity[i];
+            totalPrice += (items[i].price() + items[i].tax()) * itemQuantity[i];
         }
         return totalPrice;
     }
@@ -81,7 +81,7 @@ public class Sale {
     {
         int VAT = 0;
         for(int i = 0; i < items.length; i++){
-            VAT += items[i].tax()/10 * items[i].price();
+            VAT += items[i].tax()/10 * items[i].price() * itemQuantity[i];
         }
         return VAT;
     }
