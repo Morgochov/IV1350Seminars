@@ -42,12 +42,12 @@ public class Controller{
      * @param quantity is the amount of the item that is added
      * @return returns the added item for displaying in the theoretical view
      */
-    public ItemDTO addItem(String itemIdentifier, int quantity){
+    public ItemDTO addItem(String itemIdentifier){
         ItemDTO soldItem = sale.checkIfExists(itemIdentifier);
         if(soldItem == null){
             soldItem = datacon.fetchItem(itemIdentifier);
         }
-        int runningTotal = sale.recordItem(soldItem, quantity);
+        int runningTotal = sale.recordItem(soldItem);
         return soldItem;
     }
 

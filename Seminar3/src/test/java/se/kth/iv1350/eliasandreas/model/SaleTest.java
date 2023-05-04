@@ -54,7 +54,7 @@ public class SaleTest {
     void testSaleRecordItem(){
         String testIdentifier = "a";
         ItemDTO testItemDTO = new ItemDTO(testIdentifier, "a", "", 10, 10);
-        testSale.recordItem(testItemDTO, 1);
+        testSale.recordItem(testItemDTO);
 
         String expResult = testIdentifier;
         String result = "";
@@ -82,18 +82,18 @@ public class SaleTest {
     @Test
     void testSaleGetTotal(){
 
-        testSale.recordItem(testDTO, 3);
+        testSale.recordItem(testDTO);
 
-        int expResult = (Math.round(40*(1+10/100f)))*3;
+        int expResult = Math.round(40*(1+10/100f));
         int result = testSale.getTotal();
         assertEquals("incorrect total", expResult, result, 0);
     }
     
     @Test
     void testSaleGetVAT(){
-        testSale.recordItem(testDTO, 3);
+        testSale.recordItem(testDTO);
 
-        int expResult = (Math.round(40*(10/100f)))*3;
+        int expResult = Math.round(40*(10/100f));
         float result = testSale.getVAT();
         assertEquals("incorrect VAT", expResult, result, 0);
     }

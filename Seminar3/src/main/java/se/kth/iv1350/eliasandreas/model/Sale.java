@@ -36,7 +36,7 @@ public class Sale {
      * @param quantity is the quantity of the item which is added.
      * @return is the new price total after adding the item.
      */
-    public int recordItem(ItemDTO soldItem, int quantity){
+    public int recordItem(ItemDTO soldItem){
         int arrayLength = 0;
         /*
          * determine array length for future use
@@ -52,7 +52,7 @@ public class Sale {
         { 
             if(items[i] == soldItem)
             {
-                itemQuantity[i] += quantity;
+                itemQuantity[i]++;
                 return getTotal();
             }
         }
@@ -69,7 +69,7 @@ public class Sale {
 
         }
         newItemDTOArray[i] = soldItem;
-        newQuantityArray[i] = quantity;
+        newQuantityArray[i] = 1;
         items = newItemDTOArray;
         itemQuantity = newQuantityArray;
         return getTotal();

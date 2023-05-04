@@ -27,7 +27,7 @@ public class ControllerTest {
         String result = "";
 
         contr.startSale();
-        ItemDTO returnedItem = contr.addItem(testIdentifier, 1);
+        ItemDTO returnedItem = contr.addItem(testIdentifier);
         try{
             Field testField = ItemDTO.class.getDeclaredField("identifier");
             testField.setAccessible(true);
