@@ -15,7 +15,7 @@ import main.java.se.kth.iv1350.eliasandreas.integration.ItemDTO;
 
 public class InventorySystemTest {
     @Test
-    void testInventorySystem() {
+    void testInventorySystemSearchInventory() {
         InventorySystem testInventory = new InventorySystem();
         String testIdentifier = "test";
 
