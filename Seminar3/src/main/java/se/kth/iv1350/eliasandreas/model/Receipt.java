@@ -12,7 +12,13 @@ public class Receipt {
     public float VAT;
     public String paymentAndChange;
 
-    
+    /*
+     * Creates a new instance of a receipt.
+     * 
+     * @param sale is the sale that should be in the receipt.
+     * @param change is the change that should be in the receipt.
+     * @param amountPaid is the amount paid that should be in the receipt.
+     */
     public Receipt(Sale sale, int change, int amountPaid)
     {
         Date date = new Date();  

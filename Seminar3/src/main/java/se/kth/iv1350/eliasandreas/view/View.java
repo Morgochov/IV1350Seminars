@@ -20,12 +20,15 @@ public class View{
     }
     
     /*
-     * Performs a fake sale, by calling all system operations in the controller.
+     * Performs a fake sale.
      */
     public void runFakeExecution(){
         contr.startSale();
         ItemDTO displayAddedItem = contr.addItem("potato", 2);
         int totalPrice = contr.endSale();
         int change = contr.pays(totalPrice + 5);
+        System.out.println("\n------\nReturned ItemDTO: " + displayAddedItem);
+        System.out.println("Returned price: " + totalPrice);
+        System.out.println("Returned change: " + change + "\n------");
     }
 }

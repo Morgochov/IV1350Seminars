@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import main.java.se.kth.iv1350.eliasandreas.model.CashRegister;
 
+import java.lang.reflect.Field;
+
 public class CashRegisterTest {
 
     private int registerStartAmount;
@@ -31,10 +33,19 @@ public class CashRegisterTest {
     void testCashRegisterUpdateAmount() {
         int testAmount = 50;
         testRegister.updateAmount(testAmount);
-
+        
         int expResult = registerStartAmount + testAmount;
-        int result = testRegister.balance;
-        assertEquals("wrong register update result", expResult, result, 0);
+        int result = 0 ;
+        try{
+            Field testField = CashRegister.class.getDeclaredField("balance");
+            testField.setAccessible(true);
+            result = (int) testField.get(testRegister);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+        assertEquals("wrong register result", expResult, result, 0);
     }
 
     @Test

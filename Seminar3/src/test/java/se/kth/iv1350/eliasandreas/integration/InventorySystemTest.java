@@ -11,11 +11,9 @@ import org.junit.jupiter.api.Test;
 import main.java.se.kth.iv1350.eliasandreas.integration.InventorySystem;
 import main.java.se.kth.iv1350.eliasandreas.integration.ItemDTO;
 
-//        return new ItemDTO(itemIdentifier, "cool description", 20, 10);
-
 public class InventorySystemTest {
     @Test
-    void testInventorySystemSearchInventory() {
+    void testInventorySystem() {
         InventorySystem testInventory = new InventorySystem();
         String testIdentifier = "test";
 

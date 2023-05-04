@@ -10,25 +10,31 @@ public class DatabaseConnector {
     
     private InventorySystem inventorySystem;
     private AccountingSystem accountingSystem;
-    private DiscountSystem discountSystem;
 
+    /*
+     * Creates a new instance of a Database Connector.
+     */
     public DatabaseConnector(){
         inventorySystem = new InventorySystem();
         accountingSystem = new AccountingSystem();
-        discountSystem = new DiscountSystem();
     }
 
+    /*
+     * Fetches an item through the inventory system.
+     * 
+     * @return returns the DTO which is fetched from the inventory system.
+     */
     public ItemDTO fetchItem(String itemIdentifier){
         return inventorySystem.searchInventory(itemIdentifier);
     }
 
+    /*
+     * Logs a sale into the accounting system and the inventory system.
+     * 
+     * @param currentSale is the sale that which is logged in the two systems.
+     */
     public void logSale(Sale currentSale){
         accountingSystem.recordSale(currentSale);
         inventorySystem.updateInventory(currentSale);
-    }
-    
-    public DiscountDTO fetchDiscount(String customerID)
-    {
-        return discountSystem.searchDiscount(customerID);
     }
 }

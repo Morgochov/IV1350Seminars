@@ -4,6 +4,11 @@ import main.java.se.kth.iv1350.eliasandreas.model.Receipt;
 
 public class Printer {
     
+    /*
+     * Prints the receipt, in terms of this assignment writes out the receipt in System.out.
+     * 
+     * @param receipt is the receipt that which is being printed.
+     */
     public void printReceipt(Receipt receipt){
         System.out.println();
         System.out.println("Receipt:");

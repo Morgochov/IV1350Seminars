@@ -4,7 +4,6 @@ import main.java.se.kth.iv1350.eliasandreas.model.Sale;
 import main.java.se.kth.iv1350.eliasandreas.model.CashRegister;
 import main.java.se.kth.iv1350.eliasandreas.model.Receipt;
 import main.java.se.kth.iv1350.eliasandreas.integration.ItemDTO;
-import main.java.se.kth.iv1350.eliasandreas.integration.DiscountDTO;
 import main.java.se.kth.iv1350.eliasandreas.integration.Printer;
 import main.java.se.kth.iv1350.eliasandreas.integration.DatabaseConnector;
 
@@ -12,11 +11,17 @@ import main.java.se.kth.iv1350.eliasandreas.integration.DatabaseConnector;
  * This is the application's only controller. All calls to the model pass through this class.
  */
 public class Controller{
-    public Sale sale;
+    private Sale sale;
     private CashRegister cashRegister;
     private DatabaseConnector datacon;
     private Printer printer;
 
+    /*
+     * Creates a new instance representing the controller.
+     * 
+     * @param datacon is the DatabaseConnector for accessing external systems.
+     * @param printer is the printer for which this controller prints through.
+     */
     public Controller(DatabaseConnector datacon, Printer printer){
         this.datacon = datacon;
         this.printer = printer;
@@ -30,6 +35,13 @@ public class Controller{
         sale = new Sale();
     }
 
+    /*
+     * Adds an item to the ongoing sale.
+     * 
+     * @param itemIdentifier is the identifier of the added item
+     * @param quantity is the amount of the item that is added
+     * @return returns the added item for displaying in the theoretical view
+     */
     public ItemDTO addItem(String itemIdentifier, int quantity){
         ItemDTO soldItem = sale.checkIfExists(itemIdentifier);
         if(soldItem == null){
@@ -40,7 +52,9 @@ public class Controller{
     }
 
     /*
-     * endSale and discountrequest below
+     * endSale ends the current sale
+     * 
+     * @return returns the total price of the sale
      */
     public int endSale(){
         return sale.getTotal();
@@ -51,6 +65,7 @@ public class Controller{
      * in the cash register, creates and prints a receipt and returns the amount of change
      * 
      * @param amountPaid is the amount the customer has paid
+     * @return returns the amount of change
      */
     public int pays(int amountPaid)
     {
@@ -60,24 +75,5 @@ public class Controller{
         Receipt currentReciept = new Receipt(sale, change, amountPaid);
         printer.printReceipt(currentReciept);
         return change;
-    }
-
-    /*
-     * Discount request with no function as it is stated in the flow 
-     */
-    public void discountRequest()
-    {
-        /* 
-         * WTF varför finns denna
-         */
-    }
-    /*
-     * getDiscount with customerID as parameter
-     */
-    public int getDiscount(String customerID)
-    {
-        DiscountDTO discount = datacon.fetchDiscount(customerID);
-        sale.applyDiscount(discount);
-        return sale.getTotal();
     }
 }

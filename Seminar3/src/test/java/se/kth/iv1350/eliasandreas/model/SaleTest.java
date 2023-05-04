@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import main.java.se.kth.iv1350.eliasandreas.model.Sale;
 import main.java.se.kth.iv1350.eliasandreas.integration.ItemDTO;
 
+import java.lang.reflect.Field;
+
 public class SaleTest {
     
     private Sale testSale;
@@ -50,12 +52,31 @@ public class SaleTest {
     
     @Test
     void testSaleRecordItem(){
-        ItemDTO tempus = new ItemDTO("", "", "", 0, 0);
-        
-        testSale.items = new ItemDTO(1);
-        testSale.items[0] = tempus;
+        String testIdentifier = "a";
+        ItemDTO testItemDTO = new ItemDTO(testIdentifier, "a", "", 10, 10);
+        testSale.recordItem(testItemDTO, 1);
 
-        int temp = testSale.recordItem(tempus, 0);
+        String expResult = testIdentifier;
+        String result = "";
+        ItemDTO[] itemInTestSale;
+        try{
+            Field testFieldItems = Sale.class.getDeclaredField("items");
+            testFieldItems.setAccessible(true);
+            itemInTestSale = (ItemDTO[]) testFieldItems.get(testSale);
+
+            Field testFieldIdentifier = ItemDTO.class.getDeclaredField("identifier");
+            testFieldIdentifier.setAccessible(true);
+            result = (String) testFieldIdentifier.get(itemInTestSale[0]);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+        int compareIDResult;
+
+        compareIDResult = result.equals(expResult) ? 1 : 0;
+
+        assertEquals("wrong register result", 1, compareIDResult, 0);
     }
     
     @Test

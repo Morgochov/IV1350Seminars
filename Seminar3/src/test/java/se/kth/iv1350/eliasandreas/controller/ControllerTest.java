@@ -12,31 +12,33 @@ import main.java.se.kth.iv1350.eliasandreas.controller.Controller;
 import main.java.se.kth.iv1350.eliasandreas.integration.DatabaseConnector;
 import main.java.se.kth.iv1350.eliasandreas.integration.ItemDTO;
 
+import java.lang.reflect.Field;
+
 public class ControllerTest {
     
-    private Controller testContr;
-    private DatabaseConnector testDatacon;
 
-    @BeforeEach
-    public void setUpClass(){
-        testDatacon = new DatabaseConnector();
-        testContr = new Controller(testDatacon, null);
-    }
-
-    @AfterEach
-    public void tearDownClass(){
-        testContr = null;
-        testDatacon = null;
-    }
-    
     @Test
-    void testControllerAddItem() {
-        String testIdentifier = "peculiar identifier";
+    void testControllerAddItem(){
+        DatabaseConnector datacon = new DatabaseConnector();
+        Controller contr = new Controller(datacon, null);
+        String testIdentifier = "awesome identifier";
 
         String expResult = testIdentifier;
-        testContr.startSale();
-        ItemDTO result = testContr.addItem(testIdentifier, 1);
-        int compareIDResult = result.identifier().equals(expResult) ? 1 : 0;
+        String result = "";
+
+        contr.startSale();
+        ItemDTO returnedItem = contr.addItem(testIdentifier, 1);
+        try{
+            Field testField = ItemDTO.class.getDeclaredField("identifier");
+            testField.setAccessible(true);
+            result = (String) testField.get(returnedItem);
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+        int compareIDResult = result.equals(expResult) ? 1 : 0;
 
         assertEquals("identifier is incorrect", 1, compareIDResult, 0);
     }
