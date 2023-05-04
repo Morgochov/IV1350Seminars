@@ -11,14 +11,13 @@ import main.java.se.kth.iv1350.eliasandreas.view.View;
 public class Main{
     /*
     * The main method used to start the entire application.
-    * 
+    * A fake execution is run for testing purposes
     * @param args the application does not take any command line parameters.
     */
     public static void main(String[] args){
         DatabaseConnector datacon = new DatabaseConnector();
         Printer printer = new Printer();
         Controller contr = new Controller(datacon, printer);
-        //Run fake execution for testing purposes as well as create the view
         new View(contr).runFakeExecution();
     }
 }

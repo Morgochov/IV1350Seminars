@@ -38,16 +38,10 @@ public class Sale {
      */
     public int recordItem(ItemDTO soldItem){
         int arrayLength = 0;
-        /*
-         * determine array length for future use
-         */
         if(items != null){
             arrayLength = items.length;
         }
-        /*
-         * checks if item is already in items and if so then adds the quantity of items
-         * If the item is present it returns the running total.
-         */
+
         for(int i = 0; i < arrayLength; i++)
         { 
             if(items[i] == soldItem)
@@ -56,9 +50,7 @@ public class Sale {
                 return getTotal();
             }
         }
-        /*
-         * Extends the arrays and adds the new item and quantity there of then returns running total
-         */
+
         ItemDTO[] newItemDTOArray = new ItemDTO[arrayLength+1];
         int[] newQuantityArray = new int[arrayLength+1];
         int i;
