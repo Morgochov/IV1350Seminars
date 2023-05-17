@@ -1,0 +1,35 @@
+package main.java.se.kth.iv1350.eliasandreas.util;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+/**
+ * Logs to a file
+ */
+public class FileLogger implements Logger {
+    //    private static final FileLogger FILE_LOGGER = new FileLogger();
+//    private static final String NAME_OF_LOG_FILE = "sale_log.txt";
+    private PrintWriter logStream;
+
+    /**
+     * Creates an instance of the FileLogger
+     */
+    public FileLogger() {
+        try {
+            logStream = new PrintWriter(new FileWriter("log.txt"), true);
+        } catch (IOException ioe) {
+            System.out.println("Can Not Log.");
+            ioe.printStackTrace();
+        }
+    }
+
+    /*
+     * Prints the specified string to the file.
+     *
+     * @param The message that will be printed.
+     */
+    public void log(String message) {
+        logStream.println(message);
+    }
+}

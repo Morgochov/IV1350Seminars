@@ -24,8 +24,8 @@ public class DatabaseConnector {
      * 
      * @return returns the DTO which is fetched from the inventory system.
      */
-    public ItemDTO fetchItem(String itemIdentifier){
-        return inventorySystem.searchInventory(itemIdentifier);
+    public ItemDTO fetchItem(String itemIdentifier)throws InvalidArticleException,ConnectionException{
+            return inventorySystem.searchInventory(itemIdentifier);
     }
 
     /*
@@ -33,7 +33,7 @@ public class DatabaseConnector {
      * 
      * @param currentSale is the sale that which is logged in the two systems.
      */
-    public void logSale(Sale currentSale){
+    public void logSale(Sale currentSale)throws ConnectionException{
         accountingSystem.recordSale(currentSale);
         inventorySystem.updateInventory(currentSale);
     }

@@ -6,6 +6,9 @@ import main.java.se.kth.iv1350.eliasandreas.model.Receipt;
 import main.java.se.kth.iv1350.eliasandreas.integration.ItemDTO;
 import main.java.se.kth.iv1350.eliasandreas.integration.Printer;
 import main.java.se.kth.iv1350.eliasandreas.integration.DatabaseConnector;
+import main.java.se.kth.iv1350.eliasandreas.integration.InvalidArticleException;
+import main.java.se.kth.iv1350.eliasandreas.integration.ConnectionException;
+
 
 /*
  * This is the application's only controller. All calls to the model pass through this class.
@@ -42,7 +45,7 @@ public class Controller{
      * @param quantity is the amount of the item that is added
      * @return returns the added item for displaying in the theoretical view
      */
-    public ItemDTO addItem(String itemIdentifier){
+    public ItemDTO addItem(String itemIdentifier)throws InvalidArticleException, ConnectionException{
         ItemDTO soldItem = sale.checkIfExists(itemIdentifier);
         if(soldItem == null){
             soldItem = datacon.fetchItem(itemIdentifier);
@@ -67,7 +70,7 @@ public class Controller{
      * @param amountPaid is the amount the customer has paid
      * @return returns the amount of change
      */
-    public int pays(int amountPaid)
+    public int pays(int amountPaid) throws ConnectionException
     {
         datacon.logSale(sale);
         cashRegister.updateAmount(amountPaid);

@@ -11,8 +11,18 @@ public class InventorySystem {
      * @param itemIdentifier is the identifier which is searched for in the inventory.
      * In the case of this assignment, the itemIdentifier represents the new item we create.
      * @return returns the found ItemDTO. In the case of the assignment, returns the created ItemDTO.
+     * @throws ConnectrionException If Database could not be found
+     * @throws InvalidArticleException if the itemIdentifier dosn't exist in the sale
      */
-    public ItemDTO searchInventory(String itemIdentifier){
+    public ItemDTO searchInventory(String itemIdentifier) throws InvalidArticleException, ConnectionException{
+        if(itemIdentifier == "AB")
+        {
+            throw new InvalidArticleException();
+        }
+        if(itemIdentifier == "BA")
+        {
+            throw new ConnectionException();
+        }
         return new ItemDTO(itemIdentifier, itemIdentifier, "cool description", 20, 10);
     }
 
@@ -20,8 +30,12 @@ public class InventorySystem {
      * Updates the inventory according to the sale.
      * 
      * @param currentSale is the sale that considered when updating the inventory.
+     * @throws ConnectrionException If Database could not be found
      */
-    public void updateInventory(Sale currentSale){
-
+    public void updateInventory(Sale currentSale)throws ConnectionException{
+        if(1==2)
+        {
+            throw new ConnectionException();
+        }
     }
 }
