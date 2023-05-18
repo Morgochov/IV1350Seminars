@@ -7,8 +7,13 @@ import main.java.se.kth.iv1350.eliasandreas.integration.ItemDTO;
 import main.java.se.kth.iv1350.eliasandreas.integration.Printer;
 import main.java.se.kth.iv1350.eliasandreas.integration.DatabaseConnector;
 import main.java.se.kth.iv1350.eliasandreas.integration.InvalidArticleException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import main.java.se.kth.iv1350.eliasandreas.integration.ConnectionException;
 
+import main.java.se.kth.iv1350.eliasandreas.util.TotalRevenueObserver;
 
 /*
  * This is the application's only controller. All calls to the model pass through this class.
@@ -18,6 +23,19 @@ public class Controller{
     private CashRegister cashRegister;
     private DatabaseConnector datacon;
     private Printer printer;
+
+    private List<TotalRevenueObserver> totalRevenueObservers = new ArrayList<>();
+    
+    public void addTotalRevenueObserver(TotalRevenueObserver obs) {
+        totalRevenueObservers.add(obs);
+    }
+
+    private void notifyObservers(int total) {
+        for (TotalRevenueObserver obs : totalRevenueObservers) {
+            obs.addSaleMoney(total);
+            obs.printTotal();
+        }
+    }
 
     /*
      * Creates a new instance representing the controller.
@@ -60,7 +78,9 @@ public class Controller{
      * @return returns the total price of the sale
      */
     public int endSale(){
-        return sale.getTotal();
+        int total = sale.getTotal();
+        notifyObservers(total);
+        return total;
     }
 
     /*

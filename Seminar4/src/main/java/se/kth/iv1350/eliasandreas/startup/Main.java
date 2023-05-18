@@ -22,16 +22,8 @@ public class Main{
         DatabaseConnector datacon = new DatabaseConnector();
         Printer printer = new Printer();
         Controller contr = new Controller(datacon, printer);
-        try{
-        new View(contr).runFakeExecution();
-        }
-        catch(InvalidArticleException e)
-        {
-
-        }
-        catch(ConnectionException e)
-        {
-
-        }
+        View view = new View(contr);
+        view.runFakeExecution();
+        view.runFakeExecution();
     }
 }
