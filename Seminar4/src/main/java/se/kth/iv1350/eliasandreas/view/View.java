@@ -8,7 +8,6 @@ import main.java.se.kth.iv1350.eliasandreas.integration.ConnectionException;
 import main.java.se.kth.iv1350.eliasandreas.util.ConsoleLogger;
 import main.java.se.kth.iv1350.eliasandreas.util.FileLogger;
 import main.java.se.kth.iv1350.eliasandreas.util.Logger;
-import main.java.se.kth.iv1350.eliasandreas.util.TotalRevenueFileOutput;
 /*
  * This is a placeholder for the real view.
  * It contains a hardcoded execution with calls to all system operations in the controller.
@@ -37,9 +36,9 @@ public class View{
      */
     public void runFakeExecution()throws InvalidArticleException, ConnectionException{
         contr.startSale();
-        ItemDTO displayAddedItem;
+        ItemDTO displayAddedItem = null;
         try{
-            displayAddedItem = contr.addItem("potato");
+            displayAddedItem = contr.addItem("BA");
         }
         catch(InvalidArticleException e)
         {
