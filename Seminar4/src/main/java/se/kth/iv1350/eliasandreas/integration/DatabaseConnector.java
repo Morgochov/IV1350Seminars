@@ -8,14 +8,12 @@ import main.java.se.kth.iv1350.eliasandreas.model.Sale;
 
 public class DatabaseConnector {
     
-    private InventorySystem inventorySystem;
     private AccountingSystem accountingSystem;
 
     /*
      * Creates a new instance of a Database Connector.
      */
     public DatabaseConnector(){
-        inventorySystem = new InventorySystem();
         accountingSystem = new AccountingSystem();
     }
 
@@ -25,7 +23,7 @@ public class DatabaseConnector {
      * @return returns the DTO which is fetched from the inventory system.
      */
     public ItemDTO fetchItem(String itemIdentifier)throws InvalidArticleException,ConnectionException{
-            return inventorySystem.searchInventory(itemIdentifier);
+            return InventorySystem.getInventorySystem().searchInventory(itemIdentifier);
     }
 
     /*
@@ -35,6 +33,6 @@ public class DatabaseConnector {
      */
     public void logSale(Sale currentSale)throws ConnectionException{
         accountingSystem.recordSale(currentSale);
-        inventorySystem.updateInventory(currentSale);
+        InventorySystem.getInventorySystem().updateInventory(currentSale);
     }
 }

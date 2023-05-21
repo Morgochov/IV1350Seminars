@@ -4,6 +4,15 @@ import main.java.se.kth.iv1350.eliasandreas.model.Sale;
 
 public class InventorySystem {
     
+    private static final InventorySystem INVENTORY_SYSTEM = new InventorySystem();
+    
+    /**
+    * @return returns the only instance of this singleton.
+    */
+    public static InventorySystem getInventorySystem() {
+        return INVENTORY_SYSTEM;
+    }
+
     /*
      * Searches the inventory for an item.
      * Due to not having an inventory in this assignment, we simply create a new ItemDTO instead.
