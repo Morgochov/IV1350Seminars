@@ -8,7 +8,9 @@ package main.java.se.kth.iv1350.eliasandreas.util;
  */
 public interface Logger {
     /*
-     * @param Message will be printed to log.
+     * Logs the message.
+     * 
+     * @param message will be printed to log.
      */
     void log(String message);
 

@@ -8,8 +8,6 @@ import java.io.PrintWriter;
  * Logs to a file
  */
 public class FileLogger implements Logger {
-    //    private static final FileLogger FILE_LOGGER = new FileLogger();
-//    private static final String NAME_OF_LOG_FILE = "sale_log.txt";
     private PrintWriter logStream;
 
     /**

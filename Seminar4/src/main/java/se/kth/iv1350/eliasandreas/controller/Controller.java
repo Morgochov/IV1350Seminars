@@ -26,6 +26,12 @@ public class Controller{
 
     private List<TotalRevenueObserver> totalRevenueObservers = new ArrayList<>();
     
+
+    /*
+     * Adds an new observer to a list of observeres.
+     * 
+     * @param obs is the observer that is being added, can be different due to the interface.
+     */
     public void addTotalRevenueObserver(TotalRevenueObserver obs) {
         totalRevenueObservers.add(obs);
     }
@@ -60,7 +66,6 @@ public class Controller{
      * Adds an item to the ongoing sale.
      * 
      * @param itemIdentifier is the identifier of the added item
-     * @param quantity is the amount of the item that is added
      * @return returns the added item for displaying in the theoretical view
      */
     public ItemDTO addItem(String itemIdentifier)throws InvalidArticleException, ConnectionException{

@@ -5,21 +5,24 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Logs to a file
+ * Outputs the total revenue to a file
  */
 public class TotalRevenueFileOutput implements TotalRevenueObserver {
-    //    private static final FileLogger FILE_LOGGER = new FileLogger();
-    //    private static final String NAME_OF_LOG_FILE = "sale_log.txt";
     private PrintWriter logStream;
     private int totalRevenue = 0;
 
+    /*
+     * Adds money from a new sale into the total revenue.
+     * 
+     * @param total is the sale total which will be added to the total revenue.
+     */
     @Override
     public void addSaleMoney(int total) {
         totalRevenue += total;
     }
     
     /**
-     * Creates an instance of the FileLogger
+     * Creates an instance of the file logger
      */
     public TotalRevenueFileOutput() {
         try {
@@ -31,9 +34,7 @@ public class TotalRevenueFileOutput implements TotalRevenueObserver {
     }
 
     /*
-     * Prints the specified string to the file.
-     *
-     * @param The message that will be printed.
+     * Prints the amount to the file.
      */
     public void printTotal() {
         logStream.println("Total Revenue Generated:" + totalRevenue);

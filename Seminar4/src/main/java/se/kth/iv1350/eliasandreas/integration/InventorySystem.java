@@ -32,7 +32,7 @@ public class InventorySystem {
      * @param currentSale is the sale that considered when updating the inventory.
      * @throws ConnectrionException If Database could not be found
      */
-    public void updateInventory(Sale currentSale)throws ConnectionException{
+    public void updateInventory(Sale currentSale) throws ConnectionException{
         if(1==2)
         {
             throw new ConnectionException();

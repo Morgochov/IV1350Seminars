@@ -3,21 +3,24 @@ package main.java.se.kth.iv1350.eliasandreas.view;
 import main.java.se.kth.iv1350.eliasandreas.util.TotalRevenueObserver;
 
 /*
- * prints to <code>system.out</code>.
+ * prints the total revenue to <code>system.out</code>.
  */
 public class TotalRevenueView implements TotalRevenueObserver {
     
     private int totalRevenue = 0;
 
+    /*
+     * Adds money from a new sale into the total revenue.
+     * 
+     * @param total is the sale total which will be added to the total revenue.
+     */
     @Override
     public void addSaleMoney(int total) {
         totalRevenue += total;
     }
 
     /*
-     * Prints the specified string to <code>system.out</code>.
-     *
-     * @param message will be printed to <code>system.out</code>.
+     * Prints the total revenue to <code>system.out</code>.
      */
     @Override
     public void printTotal() {

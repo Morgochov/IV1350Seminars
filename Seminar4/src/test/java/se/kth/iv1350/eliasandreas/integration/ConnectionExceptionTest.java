@@ -8,12 +8,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import main.java.se.kth.iv1350.eliasandreas.integration.ConnectionException;
 import main.java.se.kth.iv1350.eliasandreas.integration.DatabaseConnector;
-import main.java.se.kth.iv1350.eliasandreas.controller.Controller;
 import main.java.se.kth.iv1350.eliasandreas.integration.InvalidArticleException;
+import main.java.se.kth.iv1350.eliasandreas.controller.Controller;
 import main.java.se.kth.iv1350.eliasandreas.integration.ConnectionException;
 
-public class InvalidArticleExceptionTest {
+public class ConnectionExceptionTest {
 
     private DatabaseConnector datacon;
     private Controller contr;
@@ -33,26 +34,26 @@ public class InvalidArticleExceptionTest {
     }
 
     @Test
-    void testExceptionItemExists() throws ConnectionException{
+    void testExceptionConnectionWorks() throws InvalidArticleException{
         contr.startSale();
         itemIdentifier = "potato";
         try {
             contr.addItem(itemIdentifier);
-        } catch (InvalidArticleException e) {
-            assertEquals("The item exists but InvalidArticleException is called anyways", 1, 0, 0);
+        } catch (ConnectionException e) {
+            assertEquals("The connection works but ConnectionException is called anyways", 1, 0, 0);
         }
     }
 
     @Test
-    void testExceptionItemDoesNotExist() throws ConnectionException{
+    void testExceptionConnectionDoesntWork() throws InvalidArticleException{
         contr.startSale();
-        itemIdentifier = "AB";
+        itemIdentifier = "BA";
         int excepetionIsSent = 0;
         try {
             contr.addItem(itemIdentifier);
-        } catch (InvalidArticleException e) {
+        } catch (ConnectionException e) {
             excepetionIsSent = 1;
         }
-        assertEquals("The item does not exist, but the exception wasn't sent", 1, excepetionIsSent, 0);
+        assertEquals("The connection does not work, but the exception wasn't sent", 1, excepetionIsSent, 0);
     }
 }
