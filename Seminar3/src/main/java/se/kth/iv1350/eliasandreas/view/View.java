@@ -25,9 +25,12 @@ public class View{
     public void runFakeExecution(){
         contr.startSale();
         ItemDTO displayAddedItem = contr.addItem("potato");
+        contr.addItem("potato");
+        ItemDTO displayAddedItem2 = contr.addItem("carrot");
         int totalPrice = contr.endSale();
         int change = contr.pays(totalPrice + 5);
-        System.out.println("\n------\nReturned ItemDTO: " + displayAddedItem);
+        System.out.println("\n------\nReturned ItemDTO 1: " + displayAddedItem);
+        System.out.println("Returned ItemDTO 2: " + displayAddedItem2);
         System.out.println("Returned price: " + totalPrice);
         System.out.println("Returned change: " + change + "\n------");
     }

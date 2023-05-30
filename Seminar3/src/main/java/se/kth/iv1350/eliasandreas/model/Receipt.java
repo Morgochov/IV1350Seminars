@@ -24,13 +24,13 @@ public class Receipt {
         Date date = new Date();  
         SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");  
         timeOfSale = formatter.format(date); 
-        ItemDTO[] items = sale.getItems();
+        ItemInCart[] items = sale.getItems();
         soldItems = new String[items.length];
         for(int i = 0; i<items.length; i++)
         {
-            soldItems[i] = items[i].name();
+            soldItems[i] = items[i].getItemDTO().name();
             soldItems[i] += ", " + Integer.toString(sale.getQuantity(i));
-            soldItems[i] += ", " + Integer.toString(items[i].price()) + "kr";
+            soldItems[i] += ", " + Integer.toString(items[i].getItemDTO().price()) + "kr";
         }
         totalPrice=sale.getTotal();
         VAT = sale.getVAT();

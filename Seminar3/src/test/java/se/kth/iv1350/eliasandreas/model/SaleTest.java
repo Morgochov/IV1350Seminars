@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import main.java.se.kth.iv1350.eliasandreas.model.Sale;
 import main.java.se.kth.iv1350.eliasandreas.integration.ItemDTO;
+import main.java.se.kth.iv1350.eliasandreas.model.ItemInCart;
 
 import java.lang.reflect.Field;
 
@@ -33,11 +34,10 @@ public class SaleTest {
     @Test
     void testSaleCheckIfExists(){
         String testIdentifier = "cool identifier";
-        
         String expResult = testIdentifier;
         String result;
         ItemDTO resultDTO = testSale.checkIfExists(testIdentifier);
-        int compareIDResult;
+        int compareIDResult = 0;
 
         if(resultDTO == null){
             compareIDResult = 1;
@@ -52,31 +52,38 @@ public class SaleTest {
     
     @Test
     void testSaleRecordItem(){
-        String testIdentifier = "a";
-        ItemDTO testItemDTO = new ItemDTO(testIdentifier, "a", "", 10, 10);
-        testSale.recordItem(testItemDTO);
 
-        String expResult = testIdentifier;
+        testSale.recordItem(testDTO);
+        String expResult = "potato";
         String result = "";
-        ItemDTO[] itemInTestSale;
+        ItemInCart[] itemsInTestSale = testSale.getItems();
         try{
-            Field testFieldItems = Sale.class.getDeclaredField("items");
-            testFieldItems.setAccessible(true);
-            itemInTestSale = (ItemDTO[]) testFieldItems.get(testSale);
-
             Field testFieldIdentifier = ItemDTO.class.getDeclaredField("identifier");
             testFieldIdentifier.setAccessible(true);
-            result = (String) testFieldIdentifier.get(itemInTestSale[0]);
+            result = (String) testFieldIdentifier.get(itemsInTestSale[0].getItemDTO());
         }
         catch(Exception e){
             e.printStackTrace();
         }
 
-        int compareIDResult;
-
-        compareIDResult = result.equals(expResult) ? 1 : 0;
+        int compareIDResult = result.equals(expResult) ? 1 : 0;
 
         assertEquals("wrong register result", 1, compareIDResult, 0);
+    }
+
+    @Test
+    void testSaleRecordItemAlreadyExists(){
+
+        testSale.recordItem(testDTO);
+        testSale.recordItem(testDTO);
+        int expResult = 2;
+        int result = testSale.getItems()[0].getQuantity();
+
+        try {
+            ItemInCart item = testSale.getItems()[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            assertEquals("wrong register result", result, expResult, 0);
+        }
     }
     
     @Test
