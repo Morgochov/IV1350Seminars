@@ -78,7 +78,7 @@ public class Sale {
         int totalPrice = 0;
         for(int i = 0; i < items.length; i++){
             ItemDTO DTOOfCartItem = items[i].getItemDTO();
-            totalPrice += (DTOOfCartItem.price() * (1 + items[i].getItemDTO().tax()/100f)) * items[i].getQuantity();
+            totalPrice += (DTOOfCartItem.price() * (1 + DTOOfCartItem.tax()/100f)) * items[i].getQuantity();
         }
         return totalPrice;
     }
