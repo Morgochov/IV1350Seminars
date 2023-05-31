@@ -85,7 +85,7 @@ public class SaleTest {
         testSale.recordItem(testDTO);
 
         int expResult = Math.round(40*(1+10/100f));
-        int result = testSale.getTotal();
+        int result = testSale.updateTotal();
         assertEquals("incorrect total", expResult, result, 0);
     }
     

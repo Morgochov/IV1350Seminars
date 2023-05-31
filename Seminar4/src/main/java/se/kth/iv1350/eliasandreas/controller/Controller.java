@@ -8,12 +8,10 @@ import main.java.se.kth.iv1350.eliasandreas.integration.Printer;
 import main.java.se.kth.iv1350.eliasandreas.integration.DatabaseConnector;
 import main.java.se.kth.iv1350.eliasandreas.integration.InvalidArticleException;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import main.java.se.kth.iv1350.eliasandreas.integration.ConnectionException;
 
-import main.java.se.kth.iv1350.eliasandreas.util.TotalRevenueObserver;
+import main.java.se.kth.iv1350.eliasandreas.view.TotalRevenueView;
+import main.java.se.kth.iv1350.eliasandreas.util.TotalRevenueFileOutput;
 
 /*
  * This is the application's only controller. All calls to the model pass through this class.
@@ -23,25 +21,6 @@ public class Controller{
     private CashRegister cashRegister;
     private DatabaseConnector datacon;
     private Printer printer;
-
-    private List<TotalRevenueObserver> totalRevenueObservers = new ArrayList<>();
-    
-
-    /*
-     * Adds an new observer to a list of observeres.
-     * 
-     * @param obs is the observer that is being added, can be different due to the interface.
-     */
-    public void addTotalRevenueObserver(TotalRevenueObserver obs) {
-        totalRevenueObservers.add(obs);
-    }
-
-    private void notifyObservers(int total) {
-        for (TotalRevenueObserver obs : totalRevenueObservers) {
-            obs.addSaleMoney(total);
-            obs.printTotal();
-        }
-    }
 
     /*
      * Creates a new instance representing the controller.
@@ -60,6 +39,8 @@ public class Controller{
      */
     public void startSale(){
         sale = new Sale();
+        sale.addTotalRevenueObserver(new TotalRevenueView());
+        sale.addTotalRevenueObserver(new TotalRevenueFileOutput());
     }
 
     /*
@@ -67,6 +48,8 @@ public class Controller{
      * 
      * @param itemIdentifier is the identifier of the added item
      * @return returns the added item for displaying in the theoretical view
+     * @throws ConnectionException If Database could not be found
+     * @throws InvalidArticleException if the itemIdentifier dosn't exist in the sale
      */
     public ItemDTO addItem(String itemIdentifier)throws InvalidArticleException, ConnectionException{
         ItemDTO soldItem = sale.checkIfExists(itemIdentifier);
@@ -84,7 +67,6 @@ public class Controller{
      */
     public int endSale(){
         int total = sale.getTotal();
-        notifyObservers(total);
         return total;
     }
 
@@ -94,12 +76,12 @@ public class Controller{
      * 
      * @param amountPaid is the amount the customer has paid
      * @return returns the amount of change
+     * @throws ConnectionException If Database could not be found
      */
-    public int pays(int amountPaid) throws ConnectionException
+    public int pays(int amountPaid, int change) throws ConnectionException
     {
         datacon.logSale(sale);
         cashRegister.updateAmount(amountPaid);
-        int change = cashRegister.calculateChange(amountPaid, sale.getTotal());
         Receipt currentReciept = new Receipt(sale, change, amountPaid);
         printer.printReceipt(currentReciept);
         return change;

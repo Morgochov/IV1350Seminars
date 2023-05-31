@@ -2,13 +2,35 @@ package main.java.se.kth.iv1350.eliasandreas.model;
 
 import main.java.se.kth.iv1350.eliasandreas.integration.ItemDTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import main.java.se.kth.iv1350.eliasandreas.util.TotalRevenueObserver;
 
 /*
 * One single sale made by one single customer and payed with one payment.
 */
 public class Sale {
+    private int totalPrice;
     private ItemDTO[] items;
     private int[] itemQuantity;
+
+    private List<TotalRevenueObserver> totalRevenueObservers = new ArrayList<>();
+    
+    /*
+     * Adds an new observer to a list of observeres.
+     * 
+     * @param obs is the observer that is being added, can be different due to the interface.
+     */
+    public void addTotalRevenueObserver(TotalRevenueObserver obs) {
+        totalRevenueObservers.add(obs);
+    }
+
+    private void notifyObservers(int total) {
+        for (TotalRevenueObserver obs : totalRevenueObservers) {
+            obs.newSaleWasMade(total);
+        }
+    }
 
     /*
      * Checks if an item exists in the sale.
@@ -47,7 +69,7 @@ public class Sale {
             if(items[i] == soldItem)
             {
                 itemQuantity[i]++;
-                return getTotal();
+                return updateTotal();
             }
         }
 
@@ -64,7 +86,20 @@ public class Sale {
         newQuantityArray[i] = 1;
         items = newItemDTOArray;
         itemQuantity = newQuantityArray;
-        return getTotal();
+        return updateTotal();
+    }
+
+    /*
+     * Gets the current total price of the sale.
+     * 
+     * @return returns the current total price.
+     */
+    public int updateTotal(){
+        totalPrice = 0;
+        for(int i = 0; i < items.length; i++){
+            totalPrice += (items[i].price() * (1 + items[i].tax()/100f)) * itemQuantity[i];
+        }
+        return totalPrice;
     }
 
     /*
@@ -73,10 +108,7 @@ public class Sale {
      * @return returns the current total price.
      */
     public int getTotal(){
-        int totalPrice = 0;
-        for(int i = 0; i < items.length; i++){
-            totalPrice += (items[i].price() * (1 + items[i].tax()/100f)) * itemQuantity[i];
-        }
+        notifyObservers(totalPrice);
         return totalPrice;
     }
     

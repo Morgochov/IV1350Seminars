@@ -12,11 +12,7 @@ public interface TotalRevenueObserver {
     /*
      * Adds money from a new sale into the total revenue.
      * 
-     * @param total is the sale total which will be added to the total revenue.
+     * @param priceOfTheSaleThatWasJustMade is the sale total which will be added to the total revenue.
      */
-    void addSaleMoney(int total);
-    /*
-     * Prints the total revenue.
-     */
-    void printTotal();
+    void newSaleWasMade(int priceOfTheSaleThatWasJustMade);
 }

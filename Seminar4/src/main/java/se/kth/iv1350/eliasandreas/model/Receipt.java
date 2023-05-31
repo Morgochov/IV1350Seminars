@@ -32,7 +32,7 @@ public class Receipt {
             soldItems[i] += ", " + Integer.toString(sale.getQuantity(i));
             soldItems[i] += ", " + Integer.toString(items[i].price()) + "kr";
         }
-        totalPrice=sale.getTotal();
+        totalPrice=amountPaid - change;
         VAT = sale.getVAT();
         paymentAndChange = "Amount Paid: "+ Integer.toString(amountPaid) +"\nChange: "+ Integer.toString(change);        
     }

@@ -7,20 +7,10 @@ import java.io.PrintWriter;
 /**
  * Outputs the total revenue to a file
  */
-public class TotalRevenueFileOutput implements TotalRevenueObserver {
+public class TotalRevenueFileOutput extends ObserverTemplate{
     private PrintWriter logStream;
-    private int totalRevenue = 0;
+    private static int totalRevenue;
 
-    /*
-     * Adds money from a new sale into the total revenue.
-     * 
-     * @param total is the sale total which will be added to the total revenue.
-     */
-    @Override
-    public void addSaleMoney(int total) {
-        totalRevenue += total;
-    }
-    
     /**
      * Creates an instance of the file logger
      */
@@ -33,10 +23,14 @@ public class TotalRevenueFileOutput implements TotalRevenueObserver {
         }
     }
 
-    /*
-     * Prints the amount to the file.
-     */
-    public void printTotal() {
+    @Override
+    protected void doShowTotalIncome(int total) throws Exception{
+        totalRevenue += total;
         logStream.println("Total Revenue Generated:" + totalRevenue);
+    }
+    
+    @Override
+    protected void handleErrors(Exception e){
+        e.printStackTrace();
     }
 }

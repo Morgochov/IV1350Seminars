@@ -9,9 +9,6 @@ import main.java.se.kth.iv1350.eliasandreas.util.ConsoleLogger;
 import main.java.se.kth.iv1350.eliasandreas.util.FileLogger;
 import main.java.se.kth.iv1350.eliasandreas.util.Logger;
 
-import main.java.se.kth.iv1350.eliasandreas.view.TotalRevenueView;
-import main.java.se.kth.iv1350.eliasandreas.util.TotalRevenueFileOutput;
-
 /*
  * This is a placeholder for the real view.
  * It contains a hardcoded execution with calls to all system operations in the controller.
@@ -33,8 +30,6 @@ public class View{
      */
     public View(Controller contr){
         this.contr = contr;
-        contr.addTotalRevenueObserver(new TotalRevenueView());
-        contr.addTotalRevenueObserver(new TotalRevenueFileOutput());
     }
     
     /*
@@ -44,7 +39,7 @@ public class View{
         contr.startSale();
         ItemDTO displayAddedItem = null;
         try{
-            displayAddedItem = contr.addItem("potato");
+            displayAddedItem = contr.addItem("BAA");
         }
         catch(InvalidArticleException e)
         {
@@ -62,7 +57,7 @@ public class View{
         }
         int totalPrice = contr.endSale();
         try{
-            int change = contr.pays(totalPrice + 5);
+            int change = contr.pays(totalPrice, 5);
             System.out.println("\n------\nReturned ItemDTO: " + displayAddedItem);
             System.out.println("Returned price: " + totalPrice);
             System.out.println("Returned change: " + change + "\n------");
