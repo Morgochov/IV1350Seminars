@@ -39,7 +39,7 @@ public class View{
         contr.startSale();
         ItemDTO displayAddedItem = null;
         try{
-            displayAddedItem = contr.addItem("BAA");
+            displayAddedItem = contr.addItem("potato");
         }
         catch(InvalidArticleException e)
         {
@@ -56,6 +56,7 @@ public class View{
             logger.log(e.getMessage());
         }
         int totalPrice = contr.endSale();
+        System.out.println(totalPrice);
         try{
             int change = contr.pays(totalPrice, 5);
             System.out.println("\n------\nReturned ItemDTO: " + displayAddedItem);

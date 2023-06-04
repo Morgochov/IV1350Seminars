@@ -17,5 +17,6 @@ public class TotalRevenueView extends ObserverTemplate {
     @Override
     protected void handleErrors(Exception e){
         e.printStackTrace();
+        System.out.println("Exception was called due to errors showing revenue to the view.");
     }
 }

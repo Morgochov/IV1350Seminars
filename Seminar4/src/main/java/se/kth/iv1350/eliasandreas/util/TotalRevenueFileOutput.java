@@ -32,5 +32,6 @@ public class TotalRevenueFileOutput extends ObserverTemplate{
     @Override
     protected void handleErrors(Exception e){
         e.printStackTrace();
+        System.out.println("Exception was called due to filewriting errors when writing the revenue.");
     }
 }

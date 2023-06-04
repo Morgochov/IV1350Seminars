@@ -19,7 +19,7 @@ public class Receipt {
      * @param change is the change that should be in the receipt.
      * @param amountPaid is the amount paid that should be in the receipt.
      */
-    public Receipt(Sale sale, int change, int amountPaid)
+    public Receipt(Sale sale, int change, int price)
     {
         Date date = new Date();  
         SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");  
@@ -32,8 +32,8 @@ public class Receipt {
             soldItems[i] += ", " + Integer.toString(sale.getQuantity(i));
             soldItems[i] += ", " + Integer.toString(items[i].price()) + "kr";
         }
-        totalPrice=amountPaid - change;
+        totalPrice=price;
         VAT = sale.getVAT();
-        paymentAndChange = "Amount Paid: "+ Integer.toString(amountPaid) +"\nChange: "+ Integer.toString(change);        
+        paymentAndChange = "Amount Paid: "+ Integer.toString(price + change) +"\nChange: "+ Integer.toString(change);        
     }
 }

@@ -1,11 +1,7 @@
 package main.java.se.kth.iv1350.eliasandreas.startup;
 
-import java.net.ConnectException;
-
 import main.java.se.kth.iv1350.eliasandreas.controller.Controller;
 import main.java.se.kth.iv1350.eliasandreas.integration.DatabaseConnector;
-import main.java.se.kth.iv1350.eliasandreas.integration.InvalidArticleException;
-import main.java.se.kth.iv1350.eliasandreas.integration.ConnectionException;
 import main.java.se.kth.iv1350.eliasandreas.integration.Printer;
 import main.java.se.kth.iv1350.eliasandreas.view.View;
 

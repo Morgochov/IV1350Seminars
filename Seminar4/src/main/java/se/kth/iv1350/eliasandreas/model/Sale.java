@@ -122,7 +122,6 @@ public class Sale {
         float VAT = 0;
         for(int i = 0; i < items.length; i++){
             VAT += items[i].tax()/100f * items[i].price() * itemQuantity[i];
-            System.out.println();
         }
         return VAT;
     }
