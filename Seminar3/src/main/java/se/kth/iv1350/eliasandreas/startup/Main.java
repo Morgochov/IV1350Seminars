@@ -18,7 +18,6 @@ public class Main{
         DatabaseConnector datacon = new DatabaseConnector();
         Printer printer = new Printer();
         Controller contr = new Controller(datacon, printer);
-        //Run fake execution for testing purposes as well as create the view
         new View(contr).runFakeExecution();
     }
 }
